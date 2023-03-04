@@ -28,6 +28,7 @@ CREATE TABLE Quartier (
 CREATE TABLE Compteur (
     numero NUMBER CONSTRAINT pk_Compteur PRIMARY KEY,
     libelle VARCHAR2(100),
+         VARCHAR2(100),
     longitude DECIMAL(18,15),
     latitude DECIMAL(18, 15),
     leQuartier NUMBER CONSTRAINT fk_Compteur_Quartier REFERENCES Quartier(code)

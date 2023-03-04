@@ -11,7 +11,7 @@
  ==================== Shema relationnel ====================
  
  Quartier(code(1), nom, longueurPiste)
- Compteur(numero(1), libelle, longitude, latitude, @leQuartier = Quartier.code(UQ))
+ Compteur(numero(1), libelle, observations, longitude, latitude, @leQuartier = Quartier.code)
  Jour(jour(1), jourDeSemaine(NN), vacancesZoneB)
  ReleveJournalier(leCompteur=@Compteur.numero(1), leJour=@Jour.jour(1), heure0, heure1, ..., heure23, total, probabiliteAnomalie)
 
