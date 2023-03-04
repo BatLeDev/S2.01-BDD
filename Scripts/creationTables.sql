@@ -28,7 +28,7 @@ CREATE TABLE Quartier (
 CREATE TABLE Compteur (
     numero NUMBER CONSTRAINT pk_Compteur PRIMARY KEY,
     libelle VARCHAR2(100),
-         VARCHAR2(100),
+    observations VARCHAR2(100),
     longitude DECIMAL(18,15),
     latitude DECIMAL(18, 15),
     leQuartier NUMBER CONSTRAINT fk_Compteur_Quartier REFERENCES Quartier(code)
@@ -45,11 +45,9 @@ CREATE TABLE Jour (
 
 CREATE TABLE ReleveJournalier (
     leCompteur NUMBER 
-        CONSTRAINT fk_ReleveJournalier_Compteur REFERENCES Compteur(numero)
-        CONSTRAINT uq_leCompteur UNIQUE,
-    leJour DATE 
-        CONSTRAINT fk_ReleveJournalier_Jour REFERENCES Jour(jour)
-        CONSTRAINT uq_leJour UNIQUE,
+        CONSTRAINT fk_ReleveJournalier_Compteur REFERENCES Compteur(numero),
+    leJour DATE
+        CONSTRAINT fk_ReleveJournalier_Jour REFERENCES Jour(jour),
     heure0 NUMBER
         CONSTRAINT ck_heure0 CHECK (heure0 >= 0),
     heure1 NUMBER
