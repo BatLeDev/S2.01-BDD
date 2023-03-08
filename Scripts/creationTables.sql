@@ -1,5 +1,6 @@
 /*
  SAE Velos de nantes - Script de création des tables
+ Technologie : MySQL
  
  =============== Auteurs ===============
  GUERNY Baptiste

@@ -1,3 +1,17 @@
+/*
+ SAE Velos de nantes - Script de remplissage de la table Jour
+ Technologie : MySQL
+ 
+ =============== Auteurs ===============
+ GUERNY Baptiste
+ PINTO DA SILVA Gabriel
+ NOUVION Mattéo
+ PITON Corentin
+ PIERRE Noé
+ 
+ ==================== Script de remplissage de la table Jour ====================
+ */
+
 INSERT INTO Jour VALUES (DATE '2023-01-24', 2, 'Hors Vacances');
 INSERT INTO Jour VALUES (DATE '2023-01-23', 1, 'Hors Vacances');
 INSERT INTO Jour VALUES (DATE '2023-01-22', 7, 'Hors Vacances');

@@ -1,3 +1,17 @@
+/*
+ SAE Velos de nantes - Script de remplissage de la table Compteur
+ Technologie : MySQL
+ 
+ =============== Auteurs ===============
+ GUERNY Baptiste
+ PINTO DA SILVA Gabriel
+ NOUVION Mattéo
+ PITON Corentin
+ PIERRE Noé
+ 
+ ==================== Script de remplissage de la table Compteur ====================
+ */
+
 INSERT INTO Compteur VALUES (665, 'Bonduelle vers Nord',NULL, 47.21160939094489,  -1.5432599939033043, 1);
 INSERT INTO Compteur VALUES (744, 'Calvaire vers Est',NULL, 47.215489324621586,  -1.5606018691288568, 1);
 INSERT INTO Compteur VALUES (666, 'Pont Audibert vers Sud',NULL, 47.2083580489973,  -1.5497189172153978, 1);
