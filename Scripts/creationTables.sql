@@ -9,96 +9,81 @@
  PIERRE Noé
  
  ==================== Script de création des tables ====================
-*/
-
--- ===== Surpession des tables =====
-DROP TABLE ReleveJournalier;
-DROP TABLE Jour;
-DROP TABLE Compteur;
-DROP TABLE Quartier;
+ */
+-- ===== Suppression des tables =====
+DROP TABLE IF EXISTS ReleveJournalier;
+DROP TABLE IF EXISTS Jour;
+DROP TABLE IF EXISTS Compteur;
+DROP TABLE IF EXISTS Quartier;
 
 -- ===== Création des tables =====
-
 CREATE TABLE Quartier (
-    code NUMBER CONSTRAINT pk_Quartier PRIMARY KEY,
-    nom VARCHAR2(100),
-    longueurPiste NUMBER
+    code INT PRIMARY KEY,
+    nom VARCHAR(100),
+    longueurPiste INT
 );
 
 CREATE TABLE Compteur (
-    numero NUMBER CONSTRAINT pk_Compteur PRIMARY KEY,
-    libelle VARCHAR2(100),
-    observations VARCHAR2(100),
-    longitude DECIMAL(18,15),
+    numero INT PRIMARY KEY,
+    libelle VARCHAR(100),
+    observations VARCHAR(100),
+    longitude DECIMAL(18, 15),
     latitude DECIMAL(18, 15),
-    leQuartier NUMBER CONSTRAINT fk_Compteur_Quartier REFERENCES Quartier(code)
+    leQuartier INT,
+    CONSTRAINT fk_Compteur_Quartier FOREIGN KEY (leQuartier) REFERENCES Quartier(code)
 );
 
 CREATE TABLE Jour (
-    jour DATE CONSTRAINT pk_Jour PRIMARY KEY,
-    jourDeSemaine NUMBER
-        CONSTRAINT ck_jourDeSemaine CHECK (jourDeSemaine >= 1 AND jourDeSemaine <= 7) 
-        CONSTRAINT nn_jourDeSemaine NOT NULL,
-    vacancesZoneB VARCHAR2(100)
-        CONSTRAINT ck_vacancesZoneB CHECK (vacancesZoneB IN ('Hors Vacances', 'Pont de l''Ascension', 'Vacances d''été', 'Vacances de la Toussaint', 'Vacances de Noël', 'Vacances de printemps', 'Vacances d''hiver'))
+    datejour DATE PRIMARY KEY,
+    jourDeSemaine INT CHECK (
+        jourDeSemaine >= 1
+        AND jourDeSemaine <= 7
+    ),
+    vacancesZoneB VARCHAR(100) CHECK (
+        vacancesZoneB IN (
+            'Hors Vacances',
+            'Pont de l''Ascension',
+            'Vacances d''été',
+            'Vacances de la Toussaint',
+            'Vacances de Noël',
+            'Vacances de printemps',
+            'Vacances d''hiver'
+        )
+    )
 );
 
 CREATE TABLE ReleveJournalier (
-    leCompteur NUMBER 
-        CONSTRAINT fk_ReleveJournalier_Compteur REFERENCES Compteur(numero),
-    leJour DATE
-        CONSTRAINT fk_ReleveJournalier_Jour REFERENCES Jour(jour),
-    heure0 NUMBER
-        CONSTRAINT ck_heure0 CHECK (heure0 >= 0),
-    heure1 NUMBER
-        CONSTRAINT ck_heure1 CHECK (heure1 >= 0),
-    heure2 NUMBER
-        CONSTRAINT ck_heure2 CHECK (heure2 >= 0),
-    heure3 NUMBER
-        CONSTRAINT ck_heure3 CHECK (heure3 >= 0),
-    heure4 NUMBER
-        CONSTRAINT ck_heure4 CHECK (heure4 >= 0),
-    heure5 NUMBER
-        CONSTRAINT ck_heure5 CHECK (heure5 >= 0),
-    heure6 NUMBER
-        CONSTRAINT ck_heure6 CHECK (heure6 >= 0),
-    heure7 NUMBER
-        CONSTRAINT ck_heure7 CHECK (heure7 >= 0),
-    heure8 NUMBER
-        CONSTRAINT ck_heure8 CHECK (heure8 >= 0),
-    heure9 NUMBER
-        CONSTRAINT ck_heure9 CHECK (heure9 >= 0),
-    heure10 NUMBER
-        CONSTRAINT ck_heure10 CHECK (heure10 >= 0),
-    heure11 NUMBER
-        CONSTRAINT ck_heure11 CHECK (heure11 >= 0),
-    heure12 NUMBER
-        CONSTRAINT ck_heure12 CHECK (heure12 >= 0),
-    heure13 NUMBER
-        CONSTRAINT ck_heure13 CHECK (heure13 >= 0),
-    heure14 NUMBER
-        CONSTRAINT ck_heure14 CHECK (heure14 >= 0),
-    heure15 NUMBER
-        CONSTRAINT ck_heure15 CHECK (heure15 >= 0),
-    heure16 NUMBER
-        CONSTRAINT ck_heure16 CHECK (heure16 >= 0),
-    heure17 NUMBER
-        CONSTRAINT ck_heure17 CHECK (heure17 >= 0),
-    heure18 NUMBER
-        CONSTRAINT ck_heure18 CHECK (heure18 >= 0),
-    heure19 NUMBER
-        CONSTRAINT ck_heure19 CHECK (heure19 >= 0),
-    heure20 NUMBER
-        CONSTRAINT ck_heure20 CHECK (heure20 >= 0),
-    heure21 NUMBER
-        CONSTRAINT ck_heure21 CHECK (heure21 >= 0),
-    heure22 NUMBER
-        CONSTRAINT ck_heure22 CHECK (heure22 >= 0),
-    heure23 NUMBER
-        CONSTRAINT ck_heure23 CHECK (heure23 >= 0),
-    total NUMBER
-        CONSTRAINT ck_total CHECK (total >= 0),
-    probabiliteAnomalie VARCHAR2(10)
-        CONSTRAINT ck_probabiliteAnomalie CHECK (probabiliteAnomalie IN ('Faible', 'Moyenne', 'Forte')),
-    CONSTRAINT pk_ReleveJournalier PRIMARY KEY (leCompteur, leJour)
+    leCompteur INT,
+    leJour DATE,
+    heure0 INT CHECK (heure0 >= 0),
+    heure1 INT CHECK (heure1 >= 0),
+    heure2 INT CHECK (heure2 >= 0),
+    heure3 INT CHECK (heure3 >= 0),
+    heure4 INT CHECK (heure4 >= 0),
+    heure5 INT CHECK (heure5 >= 0),
+    heure6 INT CHECK (heure6 >= 0),
+    heure7 INT CHECK (heure7 >= 0),
+    heure8 INT CHECK (heure8 >= 0),
+    heure9 INT CHECK (heure9 >= 0),
+    heure10 INT CHECK (heure10 >= 0),
+    heure11 INT CHECK (heure11 >= 0),
+    heure12 INT CHECK (heure12 >= 0),
+    heure13 INT CHECK (heure13 >= 0),
+    heure14 INT CHECK (heure14 >= 0),
+    heure15 INT CHECK (heure15 >= 0),
+    heure16 INT CHECK (heure16 >= 0),
+    heure17 INT CHECK (heure17 >= 0),
+    heure18 INT CHECK (heure18 >= 0),
+    heure19 INT CHECK (heure19 >= 0),
+    heure20 INT CHECK (heure20 >= 0),
+    heure21 INT CHECK (heure21 >= 0),
+    heure22 INT CHECK (heure22 >= 0),
+    heure23 INT CHECK (heure23 >= 0),
+    total INT CHECK (total >= 0),
+    probabiliteAnomalie VARCHAR(10) CHECK (
+        probabiliteAnomalie IN ('Faible', 'Moyenne', 'Forte')
+    ),
+    CONSTRAINT pk_ReleveJournalier PRIMARY KEY (leCompteur, leJour),
+    CONSTRAINT fk_ReleveJournalier_Compteur FOREIGN KEY (leCompteur) REFERENCES Compteur(numero),
+    CONSTRAINT fk_ReleveJournalier_Jour FOREIGN KEY (leJour) REFERENCES Jour(datejour)
 );
