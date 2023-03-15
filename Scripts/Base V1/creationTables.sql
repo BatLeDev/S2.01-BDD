@@ -28,14 +28,14 @@ CREATE TABLE Compteur (
     numero INT PRIMARY KEY,
     libelle VARCHAR(100),
     observations VARCHAR(100),
-    longitude DECIMAL(18, 15),
-    latitude DECIMAL(18, 15),
+    longitude DECIMAL(20, 18),
+    latitude DECIMAL(20, 18),
     leQuartier INT,
     CONSTRAINT fk_Compteur_Quartier FOREIGN KEY (leQuartier) REFERENCES Quartier(code)
 );
 
 CREATE TABLE Jour (
-    datejour DATE PRIMARY KEY,
+    jourDate DATE PRIMARY KEY,
     jourDeSemaine INT CHECK (
         jourDeSemaine >= 1
         AND jourDeSemaine <= 7
@@ -84,7 +84,7 @@ CREATE TABLE ReleveJournalier (
     probabiliteAnomalie VARCHAR(10) CHECK (
         probabiliteAnomalie IN ('Faible', 'Moyenne', 'Forte')
     ),
-    CONSTRAINT pk_ReleveJournalier PRIMARY KEY (leCompteur, leJour),
+    CONSTRAINT PRIMARY KEY (leCompteur, leJour),
     CONSTRAINT fk_ReleveJournalier_Compteur FOREIGN KEY (leCompteur) REFERENCES Compteur(numero),
-    CONSTRAINT fk_ReleveJournalier_Jour FOREIGN KEY (leJour) REFERENCES Jour(datejour)
+    CONSTRAINT fk_ReleveJournalier_Jour FOREIGN KEY (leJour) REFERENCES Jour(jourDate)
 );
