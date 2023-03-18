@@ -54,7 +54,7 @@
  Table Filtre
     - idFiltre est auto incrémenté
     - DOM(typeCalcul) = { 'Somme', 'Moyenne', 'Somme des sommes', 'Moyenne des sommes' }
-    - DOM(typeRegroupement) = { 'Heure', 'Jour', 'Semaine', 'Mois', 'Année' }
+    - DOM(typeRegroupement) = { 'Heure', 'Jour', 'Semaine', 'Mois', 'Annee' }
     - DOM(typeGraphique) = { 'Courbe', 'Histogramme' }
     - 0 < ordre < 6
     - ordre est unique pour un favori
