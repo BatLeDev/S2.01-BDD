@@ -81,6 +81,9 @@ CREATE TABLE ReleveJournalier (
     heure21 INT CHECK (heure21 >= 0),
     heure22 INT CHECK (heure22 >= 0),
     heure23 INT CHECK (heure23 >= 0),
+    probabiliteAnomalie VARCHAR(10) CHECK (
+        probabiliteAnomalie IN ('Faible', 'Moyenne', 'Forte')
+    ),
     CONSTRAINT PRIMARY KEY (leCompteur, leJour),
     CONSTRAINT fk_ReleveJournalier_Compteur FOREIGN KEY (leCompteur) REFERENCES Compteur(numero),
     CONSTRAINT fk_ReleveJournalier_Jour FOREIGN KEY (leJour) REFERENCES Jour(jourDate)
