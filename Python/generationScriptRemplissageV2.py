@@ -88,7 +88,7 @@ def remplissageCompteur():
             leQuartier = lineF2[1]
 
         if numero in compteur:
-            compteur[numero][4] = leQuartier
+            compteur[numero][5] = leQuartier
         else:
             compteur[numero] = ["NULL", "NULL",
                                 "NULL", "NULL", "NULL", leQuartier]
@@ -103,7 +103,7 @@ def remplissageCompteur():
     # On écrit dans le fichier de sortie
     for numero in compteur:
         fileOutput.write("INSERT INTO Compteur VALUES (" +
-                         numero + ", " + compteur[numero][0] + "," + compteur[numero][1] + ", " + compteur[numero][2] + ", " + compteur[numero][3] + ", " + compteur[numero][4] + ");\n")
+                         numero + ", " + compteur[numero][0] + "," + compteur[numero][1] + ", " + compteur[numero][2] + ", " + compteur[numero][3] + ", " + compteur[numero][4] + ", " + compteur[numero][5] + "); \n")
 
     # On ferme les fichiers
     file1.close()
