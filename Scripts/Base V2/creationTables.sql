@@ -118,7 +118,7 @@ CREATE TABLE Filtre (
     typeGraphique VARCHAR(20) NOT NULL CHECK (
         typeGraphique IN ('Courbe', 'Histogramme')
     ),
-    ordre INT NOT NULL CHECK (ordre => 1 AND ordre <= 5),
+    ordre INT NOT NULL CHECK (ordre >= 1 AND ordre <= 5),
     leFavori INT NOT NULL,
     CONSTRAINT fk_Filtre_Favori FOREIGN KEY (leFavori) REFERENCES Favori(idFavori)
 );
