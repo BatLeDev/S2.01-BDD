@@ -63,7 +63,9 @@ def remplissageCompteur():
     for i in range(1, len(content1)):
         lineF1 = content1[i].replace("\n", "").split(";")
         numero = lineF1[0]
-        libelle = "'" + lineF1[1] + "'"
+        libelle = lineF1[1].split(" vers ")
+        depart = "'" + libelle[0] + "'"
+        arrive = "'" + libelle[1] + "'"
         observations = lineF1[2]
         geolocalisation = lineF1[3].split(",")
         longitude = geolocalisation[0]
@@ -74,7 +76,7 @@ def remplissageCompteur():
         else:
             observations = "'" + observations + "'"
 
-        compteur[numero] = [libelle, observations, longitude, latitude, "NULL"]
+        compteur[numero] = [depart, arrive, observations, longitude, latitude, "NULL"]
 
     # On parcours le deuxième fichier
     for i in range(1, len(content2)):
@@ -88,14 +90,15 @@ def remplissageCompteur():
         if numero in compteur:
             compteur[numero][4] = leQuartier
         else:
-            compteur[numero] = ["NULL", "NULL", "NULL", "NULL", leQuartier]
+            compteur[numero] = ["NULL", "NULL",
+                                "NULL", "NULL", "NULL", leQuartier]
 
     # On parcours le troisième fichier
     for i in range(1, len(content3)):
         lineF3 = content3[i].replace("\n", "").split(";")
         numero = lineF3[0].lstrip('0')
         if numero not in compteur:
-            compteur[numero] = ["NULL", "NULL", "NULL", "NULL", "NULL"]
+            compteur[numero] = ["NULL", "NULL", "NULL", "NULL", "NULL", "NULL"]
 
     # On écrit dans le fichier de sortie
     for numero in compteur:
@@ -157,17 +160,14 @@ def remplissageReleveJournalier_Jour():
             ligneOutput = "(" + numero + ",DATE '" + date + "',"
             for heure in heures:
                 ligneOutput += heures[heure] + ","
-            ligneOutput += total + "," + probabiliteAnomalie + "),\n"
+            ligneOutput += probabiliteAnomalie + "),\n"
 
             # On ajoute a la chaine complete la ligne en cour
             chaineComplete += ligneOutput
 
             # On ajoute le jour dans le dictionnaire
             if date not in jour:
-                jourDeSemaine = lineF1[29]
-                # On remplace les ' par des '' pour éviter les erreurs SQL
-                vacancesZoneB = lineF1[32].replace("'", "''")
-                jour[date] = [jourDeSemaine, vacancesZoneB]
+                jour[date] = lineF1[29]
 
     # On écrit dans le fichier de sortie de la table ReleveJournalier
     chaineComplete = chaineComplete[:-2] + ";"
@@ -176,9 +176,46 @@ def remplissageReleveJournalier_Jour():
     # On écrit dans le fichier de sortie de la table Jour
     for date in jour:
         fileOutputJour.write("INSERT INTO Jour VALUES (DATE '" +
-                             date + "', " + jour[date][0] + ", '" + jour[date][1] + "');\n")
+                             date + "', " + jour[date] + ");\n")
+
+
+def remplissageCalqueJour():
+    fileOutput = open("./Scripts/Base V2/remplissageCalqueJour.sql", "w")
+    fileOutput.write(header("Script de remplissage de la table CalqueJour"))
+    fileOutput.write("INSERT INTO CalqueJour VALUES\n")
+
+    file1 = open("./data/data_calques.csv")
+    content1 = file1.readlines()  # Transforme le fichier en liste de lignes
+    file1.close()
+
+    for i in range(1, len(content1)):
+        line = content1[i].replace("\n", "").split(",")
+        date = line[0]
+        if line[1] == '1':
+            fileOutput.write("(1,'" + date + "'),\n")
+
+        if line[3] == '1':
+            fileOutput.write("(2,'" + date + "'),\n")
+
+        if line[4] == '1':
+            fileOutput.write("(3,'" + date + "'),\n")
+
+        if line[5] == '1':
+            fileOutput.write("(4,'" + date + "'),\n")
+
+        if line[9] == '1':
+            fileOutput.write("(6,'" + date + "'),\n")
+
+    fileOutput.close()
+
+    with open("./Scripts/Base V2/remplissageCalqueJour.sql", "r+") as f:
+        text = f.read()
+        f.seek(0)
+        f.write(text[:-2] + ";")
+        f.truncate()
 
 
 remplissageQuartier()
 remplissageCompteur()
 remplissageReleveJournalier_Jour()
+remplissageCalqueJour()

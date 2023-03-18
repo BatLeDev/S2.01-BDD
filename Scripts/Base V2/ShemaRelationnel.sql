@@ -60,6 +60,5 @@
     - ordre est unique pour un favori
 
  Un filtre a forcément un compteur et un jour
- Un calque a forcément un jour
  
  */

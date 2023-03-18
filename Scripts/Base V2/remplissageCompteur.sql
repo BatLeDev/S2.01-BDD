@@ -1,0 +1,88 @@
+/*
+ SAE Velos de nantes - Script de remplissage de la table Compteur
+ Technologie : MySQL
+ 
+ =============== Auteurs ===============
+ GUERNY Baptiste
+ PINTO DA SILVA Gabriel
+ NOUVION Matteo
+ PITON Corentin
+ PIERRE Noe
+*/ 
+--==================== Script de remplissage de la table Compteur ====================
+INSERT INTO Compteur VALUES (665, 'Bonduelle','Nord', NULL, 47.21160939094489, 1);
+INSERT INTO Compteur VALUES (744, 'Calvaire','Est', NULL, 47.215489324621586, 1);
+INSERT INTO Compteur VALUES (666, 'Pont Audibert','Sud', NULL, 47.2083580489973, 1);
+INSERT INTO Compteur VALUES (681, 'Stalingrad','est', NULL, 47.21890748612357, 5);
+INSERT INTO Compteur VALUES (679, 'Bd Malakoff','Gare Sud', NULL, 47.21316284797035, 5);
+INSERT INTO Compteur VALUES (699, 'Coteaux','Est', 'Releve manuel', 47.20495618318359, NULL);
+INSERT INTO Compteur VALUES (787, '50 Otages','Sud', NULL, 47.219974801673004, 1);
+INSERT INTO Compteur VALUES (788, '50 Otages','Nord', NULL, 47.219956631104175, 1);
+INSERT INTO Compteur VALUES (700, 'Promenade de Bellevue','Ouest', 'Releve manuel', 47.22881445755474, 10);
+INSERT INTO Compteur VALUES (89, 'Coteaux','Ouest', 'Releve manuel', 47.205089590298826, NULL);
+INSERT INTO Compteur VALUES (880, 'Madeleine','Nord', NULL, 47.211547513955786, 1);
+INSERT INTO Compteur VALUES (890, 'Pont de Pirmil','Sud', NULL, 47.19812739474562, 11);
+INSERT INTO Compteur VALUES (674, 'Pont Haudaudine','Sud', NULL, 47.209096588583456, 1);
+INSERT INTO Compteur VALUES (683, 'pont Anne de Bretagne','Nord', NULL, 47.20889069766999, 1);
+INSERT INTO Compteur VALUES (727, 'Pont Tabarly','Nord', NULL, 47.21345667065047, 5);
+INSERT INTO Compteur VALUES (747, 'Chemin de halage Tortière','Nord', NULL, 47.235601216475615, 4);
+INSERT INTO Compteur VALUES (746, 'Chemin de halage Tortière','Sud', NULL, 47.23557781772152, 4);
+INSERT INTO Compteur VALUES (943, 'Magellan','Ouest', NULL, 47.21039712998508, 1);
+INSERT INTO Compteur VALUES (944, 'Magellan','Est', NULL, 47.21038195207655, 1);
+INSERT INTO Compteur VALUES (1041, 'Guy Mollet','Nord', NULL, 47.252189065198046, 8);
+INSERT INTO Compteur VALUES (1042, 'Guy Mollet','Sud', NULL, 47.25219657049761, 8);
+INSERT INTO Compteur VALUES (668, 'De Gaulle','sud', NULL, 47.20350669597018, 6);
+INSERT INTO Compteur VALUES (682, 'pont Anne de Bretagne','Sud', NULL, 47.208842556632646, 3);
+INSERT INTO Compteur VALUES (677, 'Pont Willy Brandt','Malakoff', NULL, 47.212684909912554, 5);
+INSERT INTO Compteur VALUES (725, 'Pont Tabarly','Sud', NULL, 47.21342558905209, 5);
+INSERT INTO Compteur VALUES (945, 'Magellan','Ouest', NULL, 47.208824293961634, 1);
+INSERT INTO Compteur VALUES (949, 'avenue de la Libération','Sud', NULL, 47.192618952694644, 14304);
+INSERT INTO Compteur VALUES (980, 'Pont Tabarly','Sud', NULL, 47.213386158515206, 5);
+INSERT INTO Compteur VALUES (995, 'Ceineray','Ouest', NULL, 47.22119386459339, 1);
+INSERT INTO Compteur VALUES (1031, 'VN751A','St Leger les Vignes', 'Releve manuel', 47.14052901725844, NULL);
+INSERT INTO Compteur VALUES (667, 'Entrée pont Audibert','Nord', NULL, 47.207184415056695, 6);
+INSERT INTO Compteur VALUES (672, 'Pont de Pornic','Nord', NULL, 47.20137134043221, 6);
+INSERT INTO Compteur VALUES (786, '50 Otages','Nord', NULL, 47.214222086752066, 1);
+INSERT INTO Compteur VALUES (847, 'Entrée pont Audibert','Sud', NULL, 47.20717855593781, 6);
+INSERT INTO Compteur VALUES (907, 'Stade','Est', 'Releve manuel', 47.148193005013226, NULL);
+INSERT INTO Compteur VALUES (996, 'Van Iseghem','Nord', NULL, 47.23266720647105, 4);
+INSERT INTO Compteur VALUES (669, 'De Gaulle sortie Clémenceau','Nord', NULL, 47.20359482806785, 6);
+INSERT INTO Compteur VALUES (673, 'Pont de Pornic','Sud', NULL, 47.201374017938825, 6);
+INSERT INTO Compteur VALUES (680, 'Stalingrad','ouest', NULL, 47.219061513458314, 5);
+INSERT INTO Compteur VALUES (676, 'Pont Willy Brandt','Beaulieu', NULL, 47.21266213415891, 5);
+INSERT INTO Compteur VALUES (701, 'Promenade de Bellevue','Est', 'Releve manuel', 47.22870715868075, 10);
+INSERT INTO Compteur VALUES (743, 'Philippot','ouest', NULL, 47.2117289187902, 1);
+INSERT INTO Compteur VALUES (742, 'Philippot','Est', NULL, 47.21165736518504, 1);
+INSERT INTO Compteur VALUES (785, '50 Otages','Sud', NULL, 47.214213965316084, 1);
+INSERT INTO Compteur VALUES (889, 'Stade','Ouest', 'Releve manuel', 47.14832694239598, NULL);
+INSERT INTO Compteur VALUES (946, 'Magellan','Est', NULL, 47.208799340994744, 1);
+INSERT INTO Compteur VALUES (960, 'Sorinières','Nord', NULL, 47.16029353128087, 14307);
+INSERT INTO Compteur VALUES (997, 'Van Iseghem','Sud', NULL, 47.23268018192289, 4);
+INSERT INTO Compteur VALUES (1032, 'VN','Sucé sur Erdre', 'Releve manuel', 47.31479810819578, NULL);
+INSERT INTO Compteur VALUES (664, 'Bonduelle','sud', NULL, 47.21156230858751, 1);
+INSERT INTO Compteur VALUES (670, 'Pont de Pirmil','Sud', NULL, 47.200030446852566, 11);
+INSERT INTO Compteur VALUES (675, 'Pont Haudaudine','Nord', NULL, 47.20907608646761, 1);
+INSERT INTO Compteur VALUES (745, 'Calvaire','Ouest', NULL, 47.215557371093816, 1);
+INSERT INTO Compteur VALUES (881, 'Madeleine','Sud', NULL, 47.21153640429157, 1);
+INSERT INTO Compteur VALUES (950, 'avenue de la Libération','Nord', NULL, 47.19261758551086, 14304);
+INSERT INTO Compteur VALUES (959, 'Sorinières','Sud', NULL, 47.160292575285, 14307);
+INSERT INTO Compteur VALUES (981, 'Pont Tabarly','Nord', NULL, 47.21342537681631, 5);
+INSERT INTO Compteur VALUES (994, 'Ceineray','Est', NULL, 47.2211808996175, 1);
+INSERT INTO Compteur VALUES (948, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (986, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (1055, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (9998, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (987, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (8673, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (947, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (1056, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (989, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (1057, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (979, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (988, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (9999, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (977, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (1054, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (8672, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (9672, NULL,NULL, NULL, NULL, NULL);
+INSERT INTO Compteur VALUES (9673, NULL,NULL, NULL, NULL, NULL);
