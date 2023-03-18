@@ -1,5 +1,8 @@
 /*
  SAE Velos de nantes - Script de création des tables V2
+
+  ==================== Description ===================
+ Shema relationnel de la base de donnée avec les améliorations de la question 4.
  Technologie : MySQL
  
  =============== Auteurs ===============
@@ -18,6 +21,7 @@ DROP TABLE IF EXISTS CalqueJour;
 DROP TABLE IF EXISTS CalqueFavori;
 DROP TABLE IF EXISTS Filtre;
 DROP TABLE IF EXISTS Favori;
+DROP TABLE IF EXISTS Calque;
 DROP TABLE IF EXISTS Compte;
 DROP TABLE IF EXISTS ReleveJournalier;
 DROP TABLE IF EXISTS Jour;
