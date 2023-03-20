@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS Quartier;
 CREATE TABLE Quartier (
     code INT PRIMARY KEY,
     nom VARCHAR(100),
-    longueurPiste INT
+    longueurPiste INT CHECK (longueurPiste >= 0)
 );
 
 CREATE TABLE Compteur (
