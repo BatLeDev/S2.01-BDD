@@ -12,7 +12,7 @@
  
  Quartier(code(1), nom, longueurPiste)
  Compteur(numero(1), libelle, observations, longitude, latitude, @leQuartier = Quartier.code)
- Jour(jourDate(1), jourDeSemaine, vacancesZoneB)
+ Jour(jourDate(1), jourDeSemaine, vacancesZoneB, temperature)
  ReleveJournalier(leCompteur=@Compteur.numero(1), leJour=@Jour.jourDate(1), heure0, heure1, ..., heure23, total, probabiliteAnomalie)
  
  -- Contraintes textuelles

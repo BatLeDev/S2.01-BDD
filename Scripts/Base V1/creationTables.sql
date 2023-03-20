@@ -50,7 +50,8 @@ CREATE TABLE Jour (
             'Vacances de printemps',
             'Vacances d''hiver'
         )
-    )
+    ),
+    temperature DECIMAL(5, 2)
 );
 
 CREATE TABLE ReleveJournalier (

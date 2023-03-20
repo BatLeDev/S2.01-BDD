@@ -51,7 +51,8 @@ CREATE TABLE Jour (
     jourDeSemaine INT CHECK (
         jourDeSemaine > 0
         AND jourDeSemaine < 8
-    )
+    ),
+    temperature DECIMAL(5, 2),
 );
 
 CREATE TABLE ReleveJournalier (

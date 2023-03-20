@@ -4,7 +4,8 @@ INSERT INTO Calque VALUES
 (3, 'Vacances Zone B'),
 (4, 'Vacances Zone C'), 
 (5, 'Weekends'),
-(6, 'Confinements');
+(6, 'Confinements'),
+(7, 'Températures');
 
 INSERT INTO Compte (identifiant, motDePasse, typeDeCompte) VALUES
 ('Public', '$2y$10$l3RvW4xb7or5jE1y1n7aduuiRwrFFQgPwUJohnpGmjTz.WJu1QbnS', 'Public'),

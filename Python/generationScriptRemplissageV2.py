@@ -131,6 +131,10 @@ def remplissageReleveJournalier_Jour():
     fileOutputJour = open("./Scripts/Base V2/remplissageJour.sql", "w")
     fileOutputJour.write(header("Script de remplissage de la table Jour"))
 
+    file2 = open("./data/data_temperature.csv")
+    temperatures = file2.readlines()
+    file2.close()
+
     chaineComplete = ""
     # On parcours le fichier
     jour = {}
@@ -167,7 +171,12 @@ def remplissageReleveJournalier_Jour():
 
             # On ajoute le jour dans le dictionnaire
             if date not in jour:
-                jour[date] = lineF1[29]
+                jour[date] = [lineF1[29]]
+
+    # On ajoute les températures
+    for tempJour in temperatures[1:]:
+        tempJour = tempJour.replace("\n", "").replace(",", ".").split(";")
+        jour[tempJour[0]].append(tempJour[1])
 
     # On écrit dans le fichier de sortie de la table ReleveJournalier
     chaineComplete = chaineComplete[:-2] + ";"
@@ -175,8 +184,10 @@ def remplissageReleveJournalier_Jour():
 
     # On écrit dans le fichier de sortie de la table Jour
     for date in jour:
+        if len(jour[date]) == 1:
+            jour[date].append("NULL")
         fileOutputJour.write("INSERT INTO Jour VALUES (DATE '" +
-                             date + "', " + jour[date] + ");\n")
+                             date + "', " + jour[date][0] + ", " + jour[date][1] + ");\n")
 
 
 def remplissageCalqueJour():

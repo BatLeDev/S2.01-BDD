@@ -119,6 +119,10 @@ def remplissageReleveJournalier_Jour():
     file1 = open("./data/data_comptageVelo.csv")
     content1 = file1.readlines()  # Transforme le fichier en liste de lignes
 
+    file2 = open("./data/data_temperature.csv")
+    temperatures = file2.readlines()
+    file2.close()
+
     fileOutputReleveJournalier = open(
         "./Scripts/Base V1/remplissageReleveJournalier.sql", "w")
     fileOutputReleveJournalier.write(
@@ -169,14 +173,21 @@ def remplissageReleveJournalier_Jour():
                 vacancesZoneB = lineF1[32].replace("'", "''")
                 jour[date] = [jourDeSemaine, vacancesZoneB]
 
+    # On ajoute les températures
+    for tempJour in temperatures[1:]:
+        tempJour = tempJour.replace("\n", "").replace(",", ".").split(";")
+        jour[tempJour[0]].append(tempJour[1])
+
     # On écrit dans le fichier de sortie de la table ReleveJournalier
     chaineComplete = chaineComplete[:-2] + ";"
     fileOutputReleveJournalier.write(chaineComplete)
 
     # On écrit dans le fichier de sortie de la table Jour
     for date in jour:
+        if len(jour[date]) == 2:
+            jour[date].append("NULL")
         fileOutputJour.write("INSERT INTO Jour VALUES (DATE '" +
-                             date + "', " + jour[date][0] + ", '" + jour[date][1] + "');\n")
+                             date + "', " + jour[date][0] + ", '" + jour[date][1] + "', " + jour[date][2] + ");\n")
 
 
 remplissageQuartier()
