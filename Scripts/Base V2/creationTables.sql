@@ -92,7 +92,7 @@ CREATE TABLE ReleveJournalier (
 
 CREATE TABLE Compte (
     idCompte INT PRIMARY KEY AUTO_INCREMENT,
-    identifiant VARCHAR(100) NOT NULL,
+    identifiant VARCHAR(100) NOT NULL UNIQUE,
     motDePasse VARCHAR(255) NOT NULL,
     typeDeCompte VARCHAR(30) CHECK (
         typeDeCompte IN ('Public', 'Utilisateur', 'Elu', 'Administrateur')

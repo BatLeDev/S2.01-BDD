@@ -16,7 +16,7 @@
  Compteur(numero(1), depart, arrive, observations, longitude, latitude, @leQuartier = Quartier.code)
  Jour(jourDate(1), jourDeSemaine, temperature)
  ReleveJournalier(leCompteur=@Compteur.numero(1), leJour=@Jour.jourDate(1), heure0, heure1, ..., heure23, probabiliteAnomalie)
- Compte(idCompte (1), identifiant (NN), motDePasse (NN), typeDeCompte)
+ Compte(idCompte (1), identifiant (NN)(UQ), motDePasse (NN), typeDeCompte)
  Favori(idFavori(1), nomFavori, @leCompte = Compte.idCompte)
  Calque(idCalque(1), nomCalque)
  Filtre(idFiltre(1), typeCalcul(NN), typeRegroupement(NN), typeGraphique(NN), ordre, @leFavori = Favori.idFavori)
