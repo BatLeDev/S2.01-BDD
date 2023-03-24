@@ -51,7 +51,7 @@ def remplissageCompteur():
     content2 = file2.readlines()  # Transforme le fichier en liste de lignes
 
     # on ouvre le fichier qui contiens les données des capteurs
-    file3 = open("./data/data_comptageVelo.csv")
+    file3 = open("./data/data_comptageVelo_nettoye.csv")
     content3 = file3.readlines()  # Transforme le fichier en liste de lignes
 
     fileOutput = open("./Scripts/Base V1/remplissageCompteur.sql", "w")
@@ -108,7 +108,7 @@ def remplissageCompteur():
     file3.close()
     fileOutput.close()
 
-# Pour remplir la table Jour et la table ReleveJournalier il faut parcourir le fichier data_comptageVelo.csv qui détaille les relevés journaliers
+# Pour remplir la table Jour et la table ReleveJournalier il faut parcourir le fichier data_comptageVelo_nettoye.csv qui détaille les relevés journaliers
 # Table Jour : datejour, jourDeSemaine, vacancesZoneB
 # Table ReleveJournalier : leCompteur, leJour, heure0, heure1, heure2, heure3, heure4, heure5, heure6, heure7, heure8, heure9, heure10, heure11, heure12, heure13, heure14, heure15, heure16, heure17, heure18, heure19, heure20, heure21, heure22, heure23, total, probabiliteAnomalie
 # On parcours le fichier, on créé direct le fichier remplissageRelerJournalier.sql et on ajoute les jours dans un dictionnaire de la forme : {date : ,...} Si la date est déjà dans le dictionnaire on ne l'ajoute pas
@@ -116,7 +116,7 @@ def remplissageCompteur():
 
 def remplissageReleveJournalier_Jour():
     # On ouvre le fichier qui détaille les relevés journaliers des compteurs de Nantes
-    file1 = open("./data/data_comptageVelo.csv")
+    file1 = open("./data/data_comptageVelo_nettoye.csv")
     content1 = file1.readlines()  # Transforme le fichier en liste de lignes
 
     file2 = open("./data/data_temperature.csv")
@@ -137,41 +137,40 @@ def remplissageReleveJournalier_Jour():
     jour = {}
     for i in range(1, len(content1)):
         lineF1 = content1[i].replace("\n", "").split(";")
-        if lineF1[28] != "Forte" and lineF1[1] != "":
-            numero = lineF1[0]
-            # libelle = ligneF1[1]
-            date = lineF1[2]
-            heures = {}
-            for j in range(3, 27):
-                if lineF1[j] == "" or int(lineF1[j]) < 0:
-                    heures[j-3] = "0"
-                else:
-                    heures[j-3] = lineF1[j]
-
-            total = lineF1[27]
-            if int(total) < 0:
-                total = "0"
-
-            if lineF1[28] == "":
-                probabiliteAnomalie = "NULL"
+        numero = lineF1[0]
+        # libelle = ligneF1[1]
+        date = lineF1[2]
+        heures = {}
+        for j in range(3, 27):
+            if lineF1[j] == "" or int(lineF1[j]) < 0:
+                heures[j-3] = "0"
             else:
-                probabiliteAnomalie = "'" + lineF1[28] + "'"
+                heures[j-3] = lineF1[j]
 
-            # On genere la ligne
-            ligneOutput = "(" + numero + ",DATE '" + date + "',"
-            for heure in heures:
-                ligneOutput += heures[heure] + ","
-            ligneOutput += total + "," + probabiliteAnomalie + "),\n"
+        total = lineF1[27]
+        if int(total) < 0:
+            total = "0"
 
-            # On ajoute a la chaine complete la ligne en cour
-            chaineComplete += ligneOutput
+        if lineF1[28] == "":
+            probabiliteAnomalie = "NULL"
+        else:
+            probabiliteAnomalie = "'" + lineF1[28] + "'"
 
-            # On ajoute le jour dans le dictionnaire
-            if date not in jour:
-                jourDeSemaine = lineF1[29]
-                # On remplace les ' par des '' pour éviter les erreurs SQL
-                vacancesZoneB = lineF1[32].replace("'", "''")
-                jour[date] = [jourDeSemaine, vacancesZoneB]
+        # On genere la ligne
+        ligneOutput = "(" + numero + ",DATE '" + date + "',"
+        for heure in heures:
+            ligneOutput += heures[heure] + ","
+        ligneOutput += total + "," + probabiliteAnomalie + "),\n"
+
+        # On ajoute a la chaine complete la ligne en cour
+        chaineComplete += ligneOutput
+
+        # On ajoute le jour dans le dictionnaire
+        if date not in jour:
+            jourDeSemaine = lineF1[29]
+            # On remplace les ' par des '' pour éviter les erreurs SQL
+            vacancesZoneB = lineF1[32].replace("'", "''")
+            jour[date] = [jourDeSemaine, vacancesZoneB]
 
     # On ajoute les températures
     for tempJour in temperatures[1:]:
