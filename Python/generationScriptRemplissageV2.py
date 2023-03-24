@@ -140,38 +140,38 @@ def remplissageReleveJournalier_Jour():
     jour = {}
     for i in range(1, len(content1)):
         lineF1 = content1[i].replace("\n", "").split(";")
+        if lineF1[28] != "Forte" and lineF1[1] != "":
+            numero = lineF1[0]
+            # libelle = ligneF1[1]
+            date = lineF1[2]
+            heures = {}
+            for j in range(3, 27):
+                if lineF1[j] == "" or int(lineF1[j]) < 0:
+                    heures[j-3] = "0"
+                else:
+                    heures[j-3] = lineF1[j]
 
-        numero = lineF1[0]
-        # libelle = ligneF1[1]
-        date = lineF1[2]
-        heures = {}
-        for j in range(3, 27):
-            if lineF1[j] == "" or int(lineF1[j]) < 0:
-                heures[j-3] = "0"
+            total = lineF1[27]
+            if int(total) < 0:
+                total = "0"
+
+            if lineF1[28] == "":
+                probabiliteAnomalie = "NULL"
             else:
-                heures[j-3] = lineF1[j]
+                probabiliteAnomalie = "'" + lineF1[28] + "'"
 
-        total = lineF1[27]
-        if int(total) < 0:
-            total = "0"
+            # On genere la ligne
+            ligneOutput = "(" + numero + ",DATE '" + date + "',"
+            for heure in heures:
+                ligneOutput += heures[heure] + ","
+            ligneOutput += probabiliteAnomalie + "),\n"
 
-        if lineF1[28] == "":
-            probabiliteAnomalie = "NULL"
-        else:
-            probabiliteAnomalie = "'" + lineF1[28] + "'"
+            # On ajoute a la chaine complete la ligne en cour
+            chaineComplete += ligneOutput
 
-        # On genere la ligne
-        ligneOutput = "(" + numero + ",DATE '" + date + "',"
-        for heure in heures:
-            ligneOutput += heures[heure] + ","
-        ligneOutput += probabiliteAnomalie + "),\n"
-
-        # On ajoute a la chaine complete la ligne en cour
-        chaineComplete += ligneOutput
-
-        # On ajoute le jour dans le dictionnaire
-        if date not in jour:
-            jour[date] = [lineF1[29]]
+            # On ajoute le jour dans le dictionnaire
+            if date not in jour:
+                jour[date] = [lineF1[29]]
 
     # On ajoute les températures
     for tempJour in temperatures[1:]:
