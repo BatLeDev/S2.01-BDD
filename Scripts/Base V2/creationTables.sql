@@ -16,27 +16,16 @@
  */
 -- ===== Suppression des tables =====
 DROP TABLE IF EXISTS FiltreCompteur;
-
 DROP TABLE IF EXISTS FiltreJour;
-
 DROP TABLE IF EXISTS CalqueJour;
-
 DROP TABLE IF EXISTS CalqueFavori;
-
 DROP TABLE IF EXISTS Filtre;
-
 DROP TABLE IF EXISTS Favori;
-
 DROP TABLE IF EXISTS Calque;
-
 DROP TABLE IF EXISTS Compte;
-
 DROP TABLE IF EXISTS ReleveJournalier;
-
 DROP TABLE IF EXISTS Jour;
-
 DROP TABLE IF EXISTS Compteur;
-
 DROP TABLE IF EXISTS Quartier;
 
 -- ===== Création des tables =====
