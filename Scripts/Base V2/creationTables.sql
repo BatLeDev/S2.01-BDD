@@ -1,7 +1,7 @@
 /*
  SAE Velos de nantes - Script de création des tables V2
-
-  ==================== Description ===================
+ 
+ ==================== Description ===================
  Shema relationnel de la base de donnée avec les améliorations de la question 4.
  Technologie : MySQL
  
@@ -16,16 +16,27 @@
  */
 -- ===== Suppression des tables =====
 DROP TABLE IF EXISTS FiltreCompteur;
+
 DROP TABLE IF EXISTS FiltreJour;
+
 DROP TABLE IF EXISTS CalqueJour;
+
 DROP TABLE IF EXISTS CalqueFavori;
+
 DROP TABLE IF EXISTS Filtre;
+
 DROP TABLE IF EXISTS Favori;
+
 DROP TABLE IF EXISTS Calque;
+
 DROP TABLE IF EXISTS Compte;
+
 DROP TABLE IF EXISTS ReleveJournalier;
+
 DROP TABLE IF EXISTS Jour;
+
 DROP TABLE IF EXISTS Compteur;
+
 DROP TABLE IF EXISTS Quartier;
 
 -- ===== Création des tables =====
@@ -37,8 +48,8 @@ CREATE TABLE Quartier (
 
 CREATE TABLE Compteur (
     numero INT PRIMARY KEY,
-    depart VARCHAR(100),
-    arrive VARCHAR(100),
+    libelle VARCHAR(100),
+    destination VARCHAR(100),
     observations VARCHAR(100),
     longitude DECIMAL(20, 18),
     latitude DECIMAL(20, 18),
@@ -122,7 +133,10 @@ CREATE TABLE Filtre (
     typeGraphique VARCHAR(20) NOT NULL CHECK (
         typeGraphique IN ('Courbe', 'Histogramme')
     ),
-    ordre INT NOT NULL CHECK (ordre >= 1 AND ordre <= 5),
+    ordre INT NOT NULL CHECK (
+        ordre >= 1
+        AND ordre <= 5
+    ),
     leFavori INT NOT NULL,
     CONSTRAINT fk_Filtre_Favori FOREIGN KEY (leFavori) REFERENCES Favori(idFavori)
 );

@@ -2,6 +2,7 @@ def header(title):
     entete = f"/*\n SAE Velos de nantes - {title}\n Technologie : MySQL\n \n =============== Auteurs ===============\n GUERNY Baptiste\n PINTO DA SILVA Gabriel\n NOUVION Matteo\n PITON Corentin\n PIERRE Noe\n*/ \n--==================== {title} ====================\n"
     return entete
 
+
 def remplissageQuartier():
     # On ouvre le fichier qui détaille les quartiers de Nantes
     file1 = open("./data/data_quartiers_nantes.csv")
@@ -57,15 +58,14 @@ def remplissageCompteur():
     fileOutput = open("./Scripts/Base V2/remplissageCompteur.sql", "w")
     fileOutput.write(header("Script de remplissage de la table Compteur"))
 
-
     # On parcours le premier fichier
     compteur = {}
     for i in range(1, len(content1)):
         lineF1 = content1[i].replace("\n", "").split(";")
         numero = lineF1[0]
         libelle = lineF1[1].split(" vers ")
-        depart = "'" + libelle[0] + "'"
-        arrive = "'" + libelle[1] + "'"
+        libelle = "'" + libelle[0] + "'"
+        destination = "'" + libelle[1] + "'"
         observations = lineF1[2]
         geolocalisation = lineF1[3].split(",")
         longitude = geolocalisation[0]
@@ -76,7 +76,8 @@ def remplissageCompteur():
         else:
             observations = "'" + observations + "'"
 
-        compteur[numero] = [depart, arrive, observations, longitude, latitude, "NULL"]
+        compteur[numero] = [libelle, destination,
+                            observations, longitude, latitude, "NULL"]
 
     # On parcours le deuxième fichier
     for i in range(1, len(content2)):
