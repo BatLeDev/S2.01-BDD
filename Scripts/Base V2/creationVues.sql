@@ -72,8 +72,9 @@ CREATE VIEW vue_statCompteur AS
     -- Selection finale
     SELECT numero, libelle, direction, observations, longitude, latitude,
         code AS idQuartier, nom AS nomQuartier, nombreJourReleve, nombreTotalPassage,
-        CAST(nombreTotalPassage / nombreJourReleve AS DECIMAL(5,2)) AS moyennePassageParJour,
-        nbErreurs, CAST(nbErreurs / nombreJourReleve AS DECIMAL(5,3)) AS frequenceErreurs
+        CAST(nombreTotalPassage / nombreJourReleve AS DECIMAL(6,2)) AS moyennePassageParJour,
+        nbErreurs, CAST(nbErreurs / nombreJourReleve AS DECIMAL(5,3)) AS frequenceErreurs,
+        heureSouventFrequetee
     FROM Compteur
 
     -- Jointure avec les quartiers
@@ -96,5 +97,11 @@ CREATE VIEW vue_statCompteur AS
 
     -- Jointure avec l'heure de la journée qui est le plus souvent heure de pointe
     JOIN (
-
+        SELECT leCompteur AS leCompt3, COUNT(*) AS heureSouventFrequetee
+            FROM (
+                SELECT leCompteur, heureMax, COUNT(*) AS nbHeureMax
+                FROM vue_ReleveJournalierResume
+                GROUP BY leCompteur, heureMax
+            ) AS CompteurHMaxCount
+            GROUP BY leCompteur
     ) AS compteurHeureMaxPointe ON numero = leCompt3;
