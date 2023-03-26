@@ -22,6 +22,7 @@ SELECT jourDate
     FROM Jour
     WHERE jourDeSemaine = 7;
 
+
 -- 2. union
 -- 3) Quels jours sont les dimanches et les jours où il y a eu une probabilité d'erreur Faible sur un relevé?
 SELECT jourDate
@@ -31,6 +32,7 @@ UNION
 SELECT leJour
     FROM ReleveJournalier
     WHERE probabiliteAnomalie = 'Faible';
+
 
 -- ==================================================================
 -- 3.difference ensembliste
@@ -104,8 +106,8 @@ SELECT numero, nom
     FROM Compteur 
     LEFT JOIN Quartier ON leQuartier = code;
 
--- 9) Quels sont les noms des présets (Favoris du compte de type 'Public') ?
-SELECT idCompte, identifiant, nomFavori
+-- 9) Quels est la liste des presets des présets (Favoris du compte de type 'Public') ?
+SELECT idFavori, nomFavori
     FROM Compte
     LEFT JOIN Favori ON leCompte = idCompte
     WHERE typeDeCompte = 'Public';
@@ -145,31 +147,15 @@ SELECT nom, COUNT(leQuartier) AS nbCompteurs
     GROUP BY nom
     ORDER BY nbCompteurs DESC;
 
--- ================================================================== Voir avec coco, pk pas le faire sur uniquement les compteurs de centre ville
+
+-- ==================================================================
 -- 9. regroupement et restriction (avec HAVING)
--- 14) Quel est le nombre moyen de passage à midi pour chaque compteur ayant le nombre de relevé journalier maximum
-/* Requete Oracle SQL
- SELECT leCompteur, AVG(heure12) AS moyPassageMidi
-     FROM ReleveJournalier
-     GROUP BY leCompteur
-     HAVING COUNT(*) >= (
-         SELECT MAX(COUNT(*))
-             FROM ReleveJournalier
-             GROUP BY leCompteur
-     );
-*/
-
-SELECT leCompteur, AVG(heure12) AS moyPassageMidi
+-- 14) Quels sont les numéros des Compteurs ayant plus de 10 relevés journaliers avec anomalie ?
+SELECT leCompteur, COUNT(*) AS nbReleves
     FROM ReleveJournalier
+    WHERE probabiliteAnomalie IS NOT NULL
     GROUP BY leCompteur
-    HAVING COUNT(*) >= (
-        SELECT COUNT(*) AS nbReleves
-        FROM ReleveJournalier
-        GROUP BY leCompteur
-        ORDER BY nbReleves DESC
-        LIMIT 1
-    );
-
+    HAVING COUNT(*) > 10;
 
 -- 15) Quels sont les numéros des Quartier ayant le plus de compteurs ?
 /* Requete Oracle SQL
@@ -195,6 +181,7 @@ SELECT leQuartier, COUNT(*) AS nbCompteurs
     );
 -- ==================================================================
 
+
 -- 10.Division
 -- 16) Quels sont les compteurs qui ont un relevé pour chaque jour enregistré ?
 SELECT leCompteur
@@ -205,28 +192,30 @@ SELECT leCompteur
             FROM Jour
     );
 
+
 -- 11.test des valeurs (avec IN ou NOT IN)
--- 17) Quels 
-SELECT v 
-    FROM Capteur
-    WHERE NOT EXISTS (
-        SELECT *
+-- 17) Quels sont les compteurs qui n'ont pas de relevé pour le 1er janvier 2022 ?
+SELECT numero
+    FROM Compteur
+    WHERE numero NOT IN (
+        SELECT leCompteur
             FROM ReleveJournalier
-        MINUS
-        SELECT *
-            FROM ReleveJournalier
-            WHERE leCapteur = numero
+            WHERE leJour = "2022-01-01"
     );
 
+
 -- 12 test d’existence (avec EXISTS ou NOT EXISTS)
--- 18) Quels sont les compteurs leur libelle et l'arrivé de leur piste, qui ont les relevés journaliers ayant le nombre de passage sur une journée maximum
-SELECT numero, libelle, direction
-    FROM Capteur
-    WHERE NOT EXISTS (
+-- 18) Quels sont les jours feriés qui tombent pendant un week-end ?
+SELECT jourDate
+    FROM Jour
+    WHERE jourDeSemaine IN (6,7)
+    AND EXISTS (
         SELECT *
-            FROM ReleveJournalier
-        MINUS
-        SELECT *
-            FROM ReleveJournalier
-            WHERE leCapteur = numero
+            FROM CalqueJour
+            WHERE leJour = jourDate
+            AND leCalque = (
+                SELECT idCalque
+                    FROM Calque
+                    WHERE nomCalque = 'Jours feriés'
+            )
     );

@@ -26,8 +26,6 @@
  CalqueFavori(leCalque = Calque.idCalque(1), @leFavori = Favori.idFavori(1))
  
  
- 
- 
  -- Contraintes textuelles
  Table Quartier
  - longueurPiste >= 0
