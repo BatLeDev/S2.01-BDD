@@ -1,5 +1,6 @@
 /*
  SAE Velos de nantes - Shema relationnel V2
+ 
  ==================== Description ===================
  Shema relationnel de la base de donnée avec les améliorations de la question 4.
  
@@ -35,7 +36,9 @@
  
  Table ReleveJournalier
  - somme est dérivable à partir de la somme des heures
- - moyenne est dérivable à partir de la moyenne des heures 
+ - heureMax est dérivable, elle représente l’heure où il y a eu le plus de passage
+ - freqHeureMax représente la fréquentation de l’heure max
+ - 0 <= heureMax <24
  - heureX >= 0 
  - DOM(probabiliteAnomalie) = { 'Faible', 'Moyenne', 'Forte' }
  

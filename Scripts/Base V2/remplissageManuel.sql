@@ -1,3 +1,16 @@
+/*
+ SAE Velos de nantes - Script de remplissage des tables non généré automaitquement
+ Technologie : MySQL
+ 
+ =============== Auteurs ===============
+ GUERNY Baptiste
+ PINTO DA SILVA Gabriel
+ NOUVION Matteo
+ PITON Corentin
+ PIERRE Noe
+ */
+--==================== Script de remplissage manuel ====================
+
 INSERT INTO Calque VALUES
 (1, 'Jours feriés'),
 (2, 'Vacances Zone A'),

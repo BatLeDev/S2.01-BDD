@@ -1,5 +1,5 @@
 /*
- SAE Velos de nantes - Script de remplissage de la table ReleveJournalier
+ SAE Velos de nantes - Script comportant les requêtes SQL demandées
  Technologie : MySQL 
  (Les requêtes séparées par des == sont écrites en Oracle SQL pour respecté la consigne, mais écrit également en MySQL)
  
@@ -10,6 +10,7 @@
  PITON Corentin
  PIERRE Noe
  */
+--==================== Script comportant les requêtes SQL demandées ====================
 
 -- 1. projection avec restriction 
 -- 1) Quels sont les noms des quartiers où il y a plus de 30km de piste ?
