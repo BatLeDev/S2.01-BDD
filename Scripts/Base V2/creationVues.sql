@@ -64,44 +64,44 @@ CREATE VIEW vue_ReleveJournalierResume AS
             FROM ReleveJournalier
         ) AS freqHeureMaxReleveJournalier ON leCompteur = compt1 AND leJour = jour1;
 
-
 -- 1.2. Afficher pour chaque compteur le nombre total de passage, sa moyenne de passage par jour
 --      sa fréquence d'erreur (le nombre ou la probabilité d'anomalie n'est pas nulle divisé par le nombre de jours relevés)
 --      et son quartier (nom et numéro)
-CREATE VIEW vue_statCompteur AS
-    -- Selection finale
-    SELECT numero, libelle, direction, observations, longitude, latitude,
-        code AS idQuartier, nom AS nomQuartier, nombreJourReleve, nombreTotalPassage,
-        CAST(nombreTotalPassage / nombreJourReleve AS DECIMAL(6,2)) AS moyennePassageParJour,
-        nbErreurs, CAST(nbErreurs / nombreJourReleve AS DECIMAL(5,3)) AS frequenceErreurs,
-        heureSouventFrequetee
-    FROM Compteur
 
-    -- Jointure avec les quartiers
-    LEFT JOIN Quartier ON code = leQuartier
+-- 1.2.1. Afficher pour chaque compteur le nombre total de passage et le nombre de jours relevés
+CREATE VIEW vue_statCompteurTotalPassage AS
+    SELECT leCompteur, SUM(total) AS nombreTotalPassage, COUNT(*) AS nombreJourReleve
+        FROM vue_ReleveJournalierResume
+        GROUP BY leCompteur;
 
-    -- Jointure avec le nombre total de passage et le nombre de jours relevés
-    JOIN (
-        SELECT leCompteur, SUM(total) AS nombreTotalPassage, COUNT(*) AS nombreJourReleve
+-- 1.2.2. Afficher pour chaque compteur le nombre d'erreurs
+CREATE VIEW vue_statCompteurNbErreurs AS
+    SELECT leCompteur, COUNT(*) AS nbErreurs
+        FROM ReleveJournalier
+        WHERE probabiliteAnomalie IS NOT NULL
+        GROUP BY leCompteur;
+
+-- 1.2.3. Afficher pour chaque compteur l'heure de la journée qui est le plus souvent heure de pointe
+CREATE VIEW vue_statCompteurHeureMax AS
+    SELECT leCompteur, COUNT(*) AS heureSouventFrequetee
+        FROM (
+            SELECT leCompteur, heureMax, COUNT(*) AS nbHeureMax
             FROM vue_ReleveJournalierResume
-            GROUP BY leCompteur
-    ) AS statCompteur ON numero = leCompteur
+            GROUP BY leCompteur, heureMax
+        ) AS CompteurHMaxCount
+        GROUP BY leCompteur;
 
-    -- Jointure avec le nombre d'erreurs
-    JOIN (
-        SELECT leCompteur AS leCompt2, COUNT(*) AS nbErreurs
-            FROM ReleveJournalier
-            WHERE probabiliteAnomalie IS NOT NULL
-            GROUP BY leCompteur
-    ) AS compteurNbErreurs ON numero = leCompt2
+-- 1.2.4. Affichage final
+CREATE VIEW vue_statCompteur AS
+    SELECT numero, libelle, direction, observations, longitude, latitude,
+            code AS idQuartier, nom AS nomQuartier, nombreJourReleve, nombreTotalPassage,
+            CAST(nombreTotalPassage / nombreJourReleve AS DECIMAL(6,2)) AS moyennePassageParJour,
+            CAST(nbErreurs / nombreJourReleve AS DECIMAL(5,3)) AS frequenceErreurs,
+            nbErreurs, heureSouventFrequetee
+        FROM Compteur
+        LEFT JOIN Quartier ON code = leQuartier
+        LEFT JOIN vue_statCompteurTotalPassage AS T2 ON T2.leCompteur = numero
+        LEFT JOIN vue_statCompteurNbErreurs AS T3 ON T3.leCompteur = numero
+        LEFT JOIN vue_statCompteurHeureMax AS T4 ON T4.leCompteur = numero;
 
-    -- Jointure avec l'heure de la journée qui est le plus souvent heure de pointe
-    JOIN (
-        SELECT leCompteur AS leCompt3, COUNT(*) AS heureSouventFrequetee
-            FROM (
-                SELECT leCompteur, heureMax, COUNT(*) AS nbHeureMax
-                FROM vue_ReleveJournalierResume
-                GROUP BY leCompteur, heureMax
-            ) AS CompteurHMaxCount
-            GROUP BY leCompteur
-    ) AS compteurHeureMaxPointe ON numero = leCompt3;
+
