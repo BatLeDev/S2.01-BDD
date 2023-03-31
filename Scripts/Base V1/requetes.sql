@@ -1,6 +1,6 @@
 /*
  SAE Velos de nantes - Script comportant les requêtes SQL demandées
- Technologie : mySQL 
+ Technologie : MySQL 
  (Les requêtes séparées par des == sont écrites en Oracle SQL pour respecté la consigne, mais écrit également en MySQL)
  
  =============== Auteurs ===============
@@ -10,7 +10,7 @@
  PITON Corentin
  PIERRE Noe
  */
---==================== Script comportant les requêtes SQL demandées ====================
+-- ==================== Script comportant les requêtes SQL demandées ====================
 
 -- 1. projection avec restriction 
 -- 1) Quels sont les noms des quartiers où il y a plus de 30km de piste ?
@@ -116,7 +116,7 @@ SELECT numero
 
 -- 7.fonction de groupe sans regroupement
 -- 10) Quel est le nombre de week-end enregistrés ?
-SELECT CAST(COUNT(*) / 2 AS UNSIGNED) AS nbWeekEnds    
+SELECT CAST(COUNT(*) / 2 AS INT) AS nbWeekEnds    
     FROM Jour
     WHERE jourDeSemaine IN (6,7);
 /*

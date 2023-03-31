@@ -9,7 +9,7 @@
  PITON Corentin
  PIERRE Noe
 */ 
---==================== Script de remplissage de la table CalqueJour ====================
+-- ==================== Script de remplissage de la table CalqueJour ====================
 INSERT INTO CalqueJour VALUES
 (1,'2020-01-01'),
 (2,'2020-01-01'),

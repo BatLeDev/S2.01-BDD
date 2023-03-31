@@ -9,7 +9,7 @@
  PITON Corentin
  PIERRE Noe
  */
---==================== Script de remplissage manuel ====================
+-- ==================== Script de remplissage manuel ====================
 
 INSERT INTO Calque VALUES
 (1, 'Jours feriés'),

@@ -15,7 +15,7 @@
  PITON Corentin
  PIERRE Noe
  */
---==================== Script de création de vues ====================
+-- ==================== Script de création de vues ====================
 
 -- 1. Gestion des attributs dérivés
 -- 1.1. Affichier pour chaque compteur la date, le nombre total de passage par jour, 

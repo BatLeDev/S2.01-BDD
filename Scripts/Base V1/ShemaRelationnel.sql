@@ -20,13 +20,20 @@
  - heureX >= 0
  - total >= 0
  - DOM(probabiliteAnomalie) = { 'Faible', 'Moyenne', 'Forte' }
+
  Quartier :
  - longueurPiste >= 0
+
  Jour :
  - jourDate est de type DATE
  - 0 < jourDeSemaine < 8
  - DOM(vacancesZoneB) = { 'Hors Vacances', 'Pont de l'Ascension', 'Vacances d'été', 'Vacances de la Toussaint', 'Vacances de Noël', 'Vacances de printemps', 'Vacances d'hiver' }
+ - temperature est de type DECIMAL(5, 2)
+
  Compteur:
  - longitude et latitude sont de type DECIMAL(20,18)
+
+ numero, code, jourDeSemaine, total et les heures sont de type entier.
+ Tous les autres champs sont de type chaines de caractères.
  
  */

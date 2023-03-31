@@ -9,7 +9,7 @@
  PITON Corentin
  PIERRE Noe
 */ 
---==================== Script de remplissage de la table Compteur ====================
+-- ==================== Script de remplissage de la table Compteur ====================
 INSERT INTO Compteur VALUES (665, 'Bonduelle','Nord', NULL, 47.21160939094489,  -1.5432599939033043, 1); 
 INSERT INTO Compteur VALUES (744, 'Calvaire','Est', NULL, 47.215489324621586,  -1.5606018691288568, 1); 
 INSERT INTO Compteur VALUES (666, 'Pont Audibert','Sud', NULL, 47.2083580489973,  -1.5497189172153978, 1); 

@@ -9,7 +9,7 @@
  PITON Corentin
  PIERRE Noe
 */ 
---==================== Script de remplissage de la table Jour ====================
+-- ==================== Script de remplissage de la table Jour ====================
 INSERT INTO Jour VALUES (DATE '2020-01-01', 3, 7.28);
 INSERT INTO Jour VALUES (DATE '2020-01-02', 4, 9.7);
 INSERT INTO Jour VALUES (DATE '2020-01-03', 5, 10.8);

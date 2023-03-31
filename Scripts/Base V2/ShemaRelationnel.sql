@@ -14,18 +14,18 @@
  ==================== Shema relationnel V2 ( Trié par ordre de création )====================
  
  Quartier(code(1), nom, longueurPiste)
- Compteur(numero(1), libelle, destination, observations, longitude, latitude, @leQuartier = Quartier.code)
+ Compteur(numero(1), libelle, direction, observations, longitude, latitude, @leQuartier = Quartier.code)
  Jour(jourDate(1), jourDeSemaine, temperature)
  ReleveJournalier(leCompteur=@Compteur.numero(1), leJour=@Jour.jourDate(1), heure0, heure1, ..., heure23, probabiliteAnomalie)
- Compte(idCompte (1), identifiant (NN)(UQ), motDePasse (NN), typeDeCompte)
+ Compte(idCompte (1), identifiant (2), motDePasse (NN), typeDeCompte)
  Favori(idFavori(1), nomFavori, @leCompte = Compte.idCompte)
  Calque(idCalque(1), nomCalque)
- Filtre(idFiltre(1), typeCalcul(NN), typeRegroupement(NN), typeGraphique(NN), ordre(NN), dateDebut(NN), dateFin, @leFavori = Favori.idFavori)
- FiltreCompteur(leFiltre = Filtre.idFiltre(1), @leCompteur = Compteur.numero(1))
- CalqueJour(leCalque = Calque.idCalque(1), @leJour = Jour.jourDate(1))
- CalqueFavori(leCalque = Calque.idCalque(1), @leFavori = Favori.idFavori(1))
- 
- 
+ Filtre(idFiltre(1), typeCalcul(NN), typeRegroupement(NN), typeGraphique(NN), ordre(NN), dateDebut(NN), dateFin, leFavori = @Favori.idFavori)
+ FiltreCompteur(leFiltre = @Filtre.idFiltre(1), leCompteur = @Compteur.numero(1))
+ CalqueJour(leCalque = @Calque.idCalque(1), leJour = @Jour.jourDate(1))
+ CalqueFavori(leCalque = @Calque.idCalque(1), leFavori = @Favori.idFavori(1))
+
+
  -- Contraintes textuelles
  Table Quartier
  - longueurPiste >= 0
@@ -37,7 +37,7 @@
  - somme est dérivable à partir de la somme des heures
  - heureMax est dérivable, elle représente l’heure où il y a eu le plus de passage
  - freqHeureMax représente la fréquentation de l’heure max
- - 0 <= heureMax <24
+ - 0 <= heureMax < 24
  - heureX >= 0 
  - DOM(probabiliteAnomalie) = { 'Faible', 'Moyenne', 'Forte' }
  

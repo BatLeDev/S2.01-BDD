@@ -37,7 +37,7 @@ CREATE TABLE Quartier (
 CREATE TABLE Compteur (
     numero INT PRIMARY KEY,
     libelle VARCHAR(100),
-    destination VARCHAR(100),
+    direction VARCHAR(100),
     observations VARCHAR(100),
     longitude DECIMAL(20, 18),
     latitude DECIMAL(20, 18),
@@ -113,7 +113,7 @@ CREATE TABLE Calque (
 CREATE TABLE Filtre (
     idFiltre INT PRIMARY KEY AUTO_INCREMENT,
     typeCalcul VARCHAR(20) NOT NULL CHECK (
-        typeCalcul IN ('Moyenne', 'Somme', 'Maximum', 'Minimum')
+        typeCalcul IN ('Somme', 'Moyenne', 'Somme des sommes', 'Moyenne des sommes')
     ),
     typeRegroupement VARCHAR(20) NOT NULL CHECK (
         typeRegroupement IN ('Heure', 'Jour', 'Semaine', 'Mois', 'Annee')

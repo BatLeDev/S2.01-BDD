@@ -9,7 +9,7 @@
  PITON Corentin
  PIERRE Noe
 */ 
---==================== Script de remplissage de la table Quartier ====================
+-- ==================== Script de remplissage de la table Quartier ====================
 INSERT INTO Quartier VALUES (1, 'Centre Ville', 21548.7);
 INSERT INTO Quartier VALUES (2, 'Bellevue - Chantenay - Sainte Anne', 22597.3);
 INSERT INTO Quartier VALUES (3, 'Dervallières - Zola', 4403.09);

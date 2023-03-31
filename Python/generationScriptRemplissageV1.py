@@ -1,5 +1,5 @@
 def header(title):
-    entete = f"/*\n SAE Velos de nantes - {title}\n Technologie : MySQL\n \n =============== Auteurs ===============\n GUERNY Baptiste\n PINTO DA SILVA Gabriel\n NOUVION Matteo\n PITON Corentin\n PIERRE Noe\n*/ \n--==================== {title} ====================\n"
+    entete = f"/*\n SAE Velos de nantes - {title}\n Technologie : MySQL\n \n =============== Auteurs ===============\n GUERNY Baptiste\n PINTO DA SILVA Gabriel\n NOUVION Matteo\n PITON Corentin\n PIERRE Noe\n*/ \n-- ==================== {title} ====================\n"
     return entete
 
 def remplissageQuartier():

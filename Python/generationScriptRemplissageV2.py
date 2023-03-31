@@ -1,5 +1,5 @@
 def header(title):
-    entete = f"/*\n SAE Velos de nantes - {title}\n Technologie : MySQL\n \n =============== Auteurs ===============\n GUERNY Baptiste\n PINTO DA SILVA Gabriel\n NOUVION Matteo\n PITON Corentin\n PIERRE Noe\n*/ \n--==================== {title} ====================\n"
+    entete = f"/*\n SAE Velos de nantes - {title}\n Technologie : MySQL\n \n =============== Auteurs ===============\n GUERNY Baptiste\n PINTO DA SILVA Gabriel\n NOUVION Matteo\n PITON Corentin\n PIERRE Noe\n*/ \n--  ==================== {title} ====================\n"
     return entete
 
 
@@ -65,7 +65,7 @@ def remplissageCompteur():
         numero = lineF1[0]
         libelle = lineF1[1].split(" vers ")
         libelle = "'" + libelle[0] + "'"
-        destination = "'" + libelle[1] + "'"
+        direction = "'" + libelle[1] + "'"
         observations = lineF1[2]
         geolocalisation = lineF1[3].split(",")
         longitude = geolocalisation[0]
@@ -76,7 +76,7 @@ def remplissageCompteur():
         else:
             observations = "'" + observations + "'"
 
-        compteur[numero] = [libelle, destination,
+        compteur[numero] = [libelle, direction,
                             observations, longitude, latitude, "NULL"]
 
     # On parcours le deuxième fichier
