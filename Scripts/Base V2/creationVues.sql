@@ -20,7 +20,7 @@
 -- 1. Gestion des attributs dérivés
 -- 1.1. Affichier pour chaque compteur la date, le nombre total de passage par jour, 
 --      l'heure de la journée avec le plus de passage avec ce nombre de passage, la probabilité d'anomalie
-CREATE VIEW vue_ReleveJournalierResume AS
+CREATE OR REPLACE VIEW vue_ReleveJournalierResume AS
     SELECT leCompteur, leJour, probabiliteAnomalie,
         -- Nombre total de passage par jour
         heure0 + heure1 + heure2 + heure3 + heure4 + heure5 + heure6 + heure7 + heure8 + heure9 + heure10 + heure11 + heure12 + 
@@ -69,20 +69,20 @@ CREATE VIEW vue_ReleveJournalierResume AS
 --      et son quartier (nom et numéro)
 
 -- 1.2.1. Afficher pour chaque compteur le nombre total de passage et le nombre de jours relevés
-CREATE VIEW vue_statCompteurTotalPassage AS
+CREATE OR REPLACE VIEW vue_statCompteurTotalPassage AS
     SELECT leCompteur, SUM(total) AS nombreTotalPassage, COUNT(*) AS nombreJourReleve
         FROM vue_ReleveJournalierResume
         GROUP BY leCompteur;
 
 -- 1.2.2. Afficher pour chaque compteur le nombre d'erreurs
-CREATE VIEW vue_statCompteurNbErreurs AS
+CREATE OR REPLACE VIEW vue_statCompteurNbErreurs AS
     SELECT leCompteur, COUNT(*) AS nbErreurs
         FROM ReleveJournalier
         WHERE probabiliteAnomalie IS NOT NULL
         GROUP BY leCompteur;
 
 -- 1.2.3. Afficher pour chaque compteur l'heure de la journée qui est le plus souvent heure de pointe
-CREATE VIEW vue_statCompteurHeureMax AS
+CREATE OR REPLACE VIEW vue_statCompteurHeureMax AS
     SELECT leCompteur, COUNT(*) AS heureSouventFrequetee
         FROM (
             SELECT leCompteur, heureMax, COUNT(*) AS nbHeureMax
@@ -92,7 +92,7 @@ CREATE VIEW vue_statCompteurHeureMax AS
         GROUP BY leCompteur;
 
 -- 1.2.4. Affichage final
-CREATE VIEW vue_statCompteur AS
+CREATE OR REPLACE VIEW vue_statCompteur AS
     SELECT numero, libelle, direction, observations, longitude, latitude,
             code AS idQuartier, nom AS nomQuartier, nombreJourReleve, nombreTotalPassage,
             CAST(nombreTotalPassage / nombreJourReleve AS DECIMAL(6,2)) AS moyennePassageParJour,
@@ -103,5 +103,25 @@ CREATE VIEW vue_statCompteur AS
         LEFT JOIN vue_statCompteurTotalPassage AS T2 ON T2.leCompteur = numero
         LEFT JOIN vue_statCompteurNbErreurs AS T3 ON T3.leCompteur = numero
         LEFT JOIN vue_statCompteurHeureMax AS T4 ON T4.leCompteur = numero;
+
+-- 2. Simplification des requêtes
+-- 2.1. Afficher tous les présets
+CREATE OR REPLACE VIEW vue_Presets AS
+    SELECT idFavori, nomFavori
+        FROM Favori
+        JOIN Compte ON leCompte = idCompte
+        WHERE typeDeCompte = 'Public';
+
+-- 3. test des contraintes de la base de données
+-- 3.1. Afficher les filtres qui n'ont pas un ordre valide (un ordre unique pour chaque filtre du même favori)
+CREATE OR REPLACE VIEW vue_FiltreOrdreInvalide AS
+    SELECT leFavori, idFiltre, ordre
+        FROM Filtre
+        WHERE leFavori IN (
+            SELECT leFavori
+            FROM Filtre
+            GROUP BY leFavori, ordre
+            HAVING COUNT(*) > 1
+        );
 
 
