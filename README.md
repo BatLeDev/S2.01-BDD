@@ -24,4 +24,4 @@ Le but ici est de shématiser, créé, remplir et écrire quelques requetes pour
 - MySql pour la base de donnée
 
 ## Auteurs
-Ce projet a été réalisé par GUERNY Baptiste, PINTO DA SILVA Gabriel, NOUVION Mattéo, PITON Corentin et PIERRE Noé dans le cadre de notre formation en Informatique à l'IUT de Vannes.
+Ce projet a été réalisé par GUERNY Baptiste, PINTO DA SILVA Gabriel, NOUVION Matéo, PITON Corentin et PIERRE Noé dans le cadre de notre formation en Informatique à l'IUT de Vannes.

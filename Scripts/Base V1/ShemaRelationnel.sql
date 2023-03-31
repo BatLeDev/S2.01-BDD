@@ -4,7 +4,7 @@
  =============== Auteurs ===============
  GUERNY Baptiste
  PINTO DA SILVA Gabriel
- NOUVION Mattéo
+ NOUVION Matéo
  PITON Corentin
  PIERRE Noé
  
