@@ -20,9 +20,8 @@
  Compte(idCompte (1), identifiant (NN)(UQ), motDePasse (NN), typeDeCompte)
  Favori(idFavori(1), nomFavori, @leCompte = Compte.idCompte)
  Calque(idCalque(1), nomCalque)
- Filtre(idFiltre(1), typeCalcul(NN), typeRegroupement(NN), typeGraphique(NN), ordre, @leFavori = Favori.idFavori)
+ Filtre(idFiltre(1), typeCalcul(NN), typeRegroupement(NN), typeGraphique(NN), ordre(NN), dateDebut(NN), dateFin, @leFavori = Favori.idFavori)
  FiltreCompteur(leFiltre = Filtre.idFiltre(1), @leCompteur = Compteur.numero(1))
- FiltreJour(leFiltre = Filtre.idFiltre(1), @leJour = Jour.jourDate(1))
  CalqueJour(leCalque = Calque.idCalque(1), @leJour = Jour.jourDate(1))
  CalqueFavori(leCalque = Calque.idCalque(1), @leFavori = Favori.idFavori(1))
  
@@ -59,7 +58,8 @@
  - DOM(typeGraphique) = { 'Courbe', 'Histogramme' }
  - 0 < ordre < 6
  - ordre est unique pour un favori
+ - dateDebut <= dateFin
  
- Un filtre a forcément un compteur et un jour
+ Un filtre est associé à au moins un compteur
  
  */

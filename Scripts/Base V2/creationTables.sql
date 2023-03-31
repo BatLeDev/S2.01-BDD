@@ -16,7 +16,6 @@
  */
 -- ===== Suppression des tables =====
 DROP TABLE IF EXISTS FiltreCompteur;
-DROP TABLE IF EXISTS FiltreJour;
 DROP TABLE IF EXISTS CalqueJour;
 DROP TABLE IF EXISTS CalqueFavori;
 DROP TABLE IF EXISTS Filtre;
@@ -126,8 +125,11 @@ CREATE TABLE Filtre (
         ordre >= 1
         AND ordre <= 5
     ),
+    dateDebut DATE NOT NULL,
+    dateFin DATE,
     leFavori INT NOT NULL,
-    CONSTRAINT fk_Filtre_Favori FOREIGN KEY (leFavori) REFERENCES Favori(idFavori)
+    CONSTRAINT fk_Filtre_Favori FOREIGN KEY (leFavori) REFERENCES Favori(idFavori),
+    CONSTRAINT dateInf CHECK (dateFin >= dateDebut)
 );
 
 CREATE TABLE FiltreCompteur (
@@ -136,14 +138,6 @@ CREATE TABLE FiltreCompteur (
     CONSTRAINT PRIMARY KEY (leFiltre, leCompteur),
     CONSTRAINT fk_FiltreCompteur_Filtre FOREIGN KEY (leFiltre) REFERENCES Filtre(idFiltre),
     CONSTRAINT fk_FiltreCompteur_Compteur FOREIGN KEY (leCompteur) REFERENCES Compteur(numero)
-);
-
-CREATE TABLE FiltreJour (
-    leFiltre INT NOT NULL,
-    leJour DATE NOT NULL,
-    CONSTRAINT PRIMARY KEY (leFiltre, leJour),
-    CONSTRAINT fk_FiltreJour_Filtre FOREIGN KEY (leFiltre) REFERENCES Filtre(idFiltre),
-    CONSTRAINT fk_FiltreJour_Jour FOREIGN KEY (leJour) REFERENCES Jour(jourDate)
 );
 
 CREATE TABLE CalqueJour (
