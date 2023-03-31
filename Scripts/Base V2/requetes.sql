@@ -116,7 +116,7 @@ SELECT idFavori, nomFavori
 
 -- 7.fonction de groupe sans regroupement
 -- 10) Quel est le nombre de week-end enregistrés ?
-SELECT CAST(count(*) / 2 AS UNSIGNED) AS nbWeekEnds    
+SELECT CAST(count(*) / 2 AS INT) AS nbWeekEnds    
     FROM Jour
     WHERE jourDeSemaine IN (6,7);
 /*
