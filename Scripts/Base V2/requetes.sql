@@ -28,7 +28,7 @@ SELECT jourDate
 -- 3) Quels jours sont les dimanches et les jours où il y a eu une probabilité d'erreur Faible sur un relevé?
 SELECT jourDate
     FROM Jour
-    WHERE jourDeSemaine IN (7) 
+    WHERE jourDeSemaine = 7
 UNION
 SELECT leJour
     FROM ReleveJournalier
